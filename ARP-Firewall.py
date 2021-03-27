@@ -472,13 +472,3 @@ def launch ():
         core.Interactive.variables['BHT'] = BHT
         
     core.openflow.addListenerByName("ConnectionUp", start_firewall)
- 
- #fsw[1].showRules()
- #fsw[0].firewall
- #fsw[2].deleteRule(False , 'any', '00:00:00:00:00:03' )
- #fsw[2].deleteRule(True , 'any', '00:00:00:00:00:03' )
- #fsw[1].addRule(True,'00:00:00:00:00:03','any',True)
- #fsw[2].reset_firewall(True)
-#./pox.py forwarding.firewall samples.pretty_log log.level --DEBUG  py
-#fsw[1].sendarpreq()
-#sudo ifconfig ens38 10.0.0.5 netmask 255.255.255.0
