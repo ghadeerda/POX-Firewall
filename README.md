@@ -10,8 +10,8 @@ Also, it prevents the controller from faked ARP flooding and stops the attacker 
 
 It also includes a mechanism to block any host who wants to flood the controller with a huge number of packets and affect its decision. Our three classes mechanism provides an easy way to classify the hosts in the network, which can be used in further solutions to stop other attacks on SDN.
 
-To apply the firewall, place "firewall.py" to "forwarding".
+To apply the firewall, place **"firewall.py"** to **"forwarding"**.
 
 Run the controller with:
 
-./pox.py forwarding.firewall openflow.discovery  samples.pretty_log log.level --DEBUG  py  
+`./pox.py forwarding.firewall openflow.discovery  samples.pretty_log log.level --DEBUG  py`  
