@@ -415,10 +415,9 @@ class Firewall (EventMixin):
                 # print(BHT)
                 return  
         
-        #if DHCP packet
-        #if packet.type == packet.DHCP_TYPE:
-        #    print("yessssssssssssss")
-        print("rrrrrrrrrrrrrrrrrr")
+        if DHCP packet
+        if packet.type == packet.DHCP_TYPE:
+            print("DHCP-Packet")
         print(packet)
         #     dhcp_packet = packet.payload   
         #     #check if dhcp ACK and from the server
