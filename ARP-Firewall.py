@@ -59,8 +59,7 @@ def count_packets(pktData):
             #threads.append(x)
             x.start()        
         return False    
-              
-    
+            
 class Firewall (EventMixin):
     def __init__(self, connection):
         log.info("Firewall activated")
@@ -78,11 +77,7 @@ class Firewall (EventMixin):
     def block_mac (self, src,dst, duration = 0):
         """
         installs a flow to block an attacker for a while using his MAC address
-        """        
-        # if duration is not None:
-        #    if not isinstance(duration, tuple):
-        #        duration = (duration,duration)
-        
+        """                
         msg = of.ofp_flow_mod()
         #match = of.ofp_match(dl_type = 0x800,nw_proto = pkt.ipv4.ICMP_PROTOCOL)
         
@@ -95,22 +90,8 @@ class Firewall (EventMixin):
             match.dl_dst = EthAddr(dst)
         else:
             match.dl_src = EthAddr(src)
-            match.dl_dst = EthAddr(dst)
-        #match.set_new_dst=None
-        #match.nw_src = IPAddr(src)
-        #match.nw_dst = IPAddr(dst)        
-        #match.dl_src	Ethernet source address
-        #match.dl_dst	Ethernet destination address
-        #match.in_port	Switch port number the packet arrived on
-        #match.nw_proto = nw_proto # 1 for ICMP or ARP opcode         
-        #don't specify the action, so the default is to do nothing        
+            match.dl_dst = EthAddr(dst)      
         msg.match = match
-        # msg.idle_timeout = duration[0]
-        # msg.idle_timeout = of.OFP_FLOW_PERMANENT
-        # msg.hard_timeout = duration[1]
-        #msg.hard_timeout = of.OFP_FLOW_PERMANENT        
-        #default duration is PERMANENT        
-        #msg.priority = 20
         self.connection.send(msg)
 
     # function that allows adding firewall rules into the firewall table
@@ -129,7 +110,6 @@ class Firewall (EventMixin):
                 for i in range(0, len(fsw)):
                     fsw[i].firewall[(str(src), str(dst))]=value                    
                     fsw[i].block_mac(src,dst, 10000)
-
 
     # function that allows deleting firewall rules from the firewall table
     #toAll : similar rule on other switches
@@ -263,8 +243,6 @@ class Firewall (EventMixin):
                
         #our function to detect the attack
         def antiArpSpoof():
-             #from getmac import get_mac_address as gma
-             #print(gma())
              # if it's an ARP packet, get the payload
             arp_packet = packet.payload   
                # OPCODES
@@ -314,8 +292,7 @@ class Firewall (EventMixin):
             pktData_count[pktData] += 1                   
             if count_packets(pktData)  :
                 block_mac(hwsrc)
-                return True     
-            
+                return True                 
             
             #if the source IP address already exists in the table
             for key,value in VHT.items():  
@@ -411,8 +388,6 @@ class Firewall (EventMixin):
                         BHT[key] = 0
                         log.info("Time elapsed to mitigate the attack: %s",mitigation_time)
                         
-                # print("66666:")
-                # print(BHT)
                 return  
         
         if DHCP packet
